@@ -15,6 +15,7 @@ public class TestEditorial {
     @Test
     public void TestAgregarColeccion(){
         Editorial editorial = new Editorial();
+        // El primero parametro es el id de la coleccion y el segundo es el nombre
         editorial.addColeccion(1, "Coleccion 1");
         assertEquals(1, editorial.getNumeroColecciones());
         editorial.addColeccion(2, "Coleccion 2");
@@ -30,10 +31,13 @@ public class TestEditorial {
         // addLibro debería mandar una excepción de este tipo 
         // throw new IllegalArgumentException("No se encontro la coleccion con id " + idColeccion);
         assertThrows(IllegalArgumentException.class, () -> {
+            // el primer parametro es el id del libro, el segundo es el nombre, el tercero es el id de la coleccion
+            // y el cuarto es el autor
             editorial.addLibro(1, "Libro 1", 0, null);
         });        
    
-
+        // el primer parametro es el id del libro, el segundo es el nombre, el tercero es el id de la coleccion
+        // y el cuarto es el autor
         editorial.addLibro(1, "Libro 1", 1, null);
         assertEquals(1, editorial.getNumeroLibros());
         editorial.addLibro(2, "Libro 2", 1, null);
@@ -50,6 +54,7 @@ public class TestEditorial {
         editorial.addLibro(3, "Libro 3", 1, null);
         editorial.addLibro(4, "Libro 4", 1, null);
         editorial.addLibro(5, "Libro 5", 1, null);
+        // el parametro es el id de la coleccion
         assertEquals(2, editorial.getNumeroLibrosEnColeccion(0));
         assertEquals(3, editorial.getNumeroLibrosEnColeccion(1));
 
@@ -61,6 +66,7 @@ public class TestEditorial {
     @Test
     public void TestAgregarRevista(){
         Editorial editorial = new Editorial();
+        // el primer parametro es el id de la revista y el segundo es el nombre
         editorial.addRevista(1, "Revista 1");
         editorial.addRevista(2, "Revista 2");
         assertEquals(2, editorial.getNumeroRevistas());
@@ -73,15 +79,19 @@ public class TestEditorial {
         editorial.addRevista(revista);
         assertEquals(1, editorial.getNumeroRevistas());
 
+        // el primer parámetro es el id del comite y el segundo es una persona
+        // para construir una persona se necesita el id y el nombre
         ComiteEditorial comite = new ComiteEditorial(
             1, 
             new Persona(1, "Presidente"));
         
         comite.addMiembro(new Persona(2, "Miembro 1"));
 
+        // el primer parámetro es el id del articulo, el segundo es el revisor 1 y el tercero es el revisor 2
         Articulo articulo = new Articulo(1,
         new Persona(1, "Revisor 1"), 
         new Persona(2, "Revisor 2"));
+
         articulo.addAutor(new Persona(1, "Autor 1"));
 
         // la edición se crea con el articulo principal
